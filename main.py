@@ -100,23 +100,6 @@ class C(object):
 
 cc = C()
 
-# 如果要 Override 一定要 import 為 module 方式
-import socket
-
-print 'C:\python27\lib\socket.pyc:', socket
-
-from socket import socket as _socket
-
-def _send(self, data):
-	print 'send data by _send'
-	return _socket.send(data)
-
-socket.socket.send = lambda: _send()
-
-# socket.socket()
-
-
-
 # __slots__ 應用(Python 本來是 Dynamical Member, 使用 __slots__ 設定後可以加快執行速度, 但是就不能任意增加屬性了)
 # 並且將既有定義的屬性變為 Read-Only
 class Foo3(object):
