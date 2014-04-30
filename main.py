@@ -38,6 +38,21 @@ echo3()
 from lib_lib import mylib
 mylib().test(789)  # as same as after override instance method
 
+# override loggging method
+import logging
+from logging import warn as _warn
+
+def _warn_(msg):
+	print '-'*50
+	print 'Do something before invoke info()'
+	h = _warn(msg)
+	print '-'*50
+	return h
+
+logging.warn = lambda msg: _warn_(msg)
+logging.warn("test after override logging.warn.")
+# import pdb; pdb.set_trace()
+
 # override build-in module
 import time
 
@@ -51,7 +66,8 @@ def time2():
 	# 這樣會變成無窮遞迴, 因為已經被替換掉了
 	
 	# return 'after override: ' + str(time.time())
-	return 'after override build-in Module: ' + str(_time()) + ' end!'
+	print 'after override build-in Module: ' + str(_time()) + ' end!'
+	return _time()
 
 time.time = lambda: time2()
 
