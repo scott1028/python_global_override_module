@@ -21,7 +21,7 @@ echo()
 
 lib_lib.do_in_echo = lambda: echo2()
 
-from lib import echo, echo3
+from lib import echo, echo3, echoX
 
 echo()
 
@@ -165,3 +165,11 @@ except Exception as e:
 aaa.x=1000
 aaa.x=200
 print aaa.x, 'because "aaa.x" in the __slots__ and not defined in class.'
+
+# 製作 Global Container...
+echoX()
+lib_lib.c.append('added to global container.')
+echoX()
+
+import lib2
+lib2.test9()  # 即使跨檔案也是共用的

@@ -7,3 +7,6 @@ class mylib:
 	def test(self, data):
 		print self, data, 'origin class method'
 		# return 1
+
+# as global container
+c = []
