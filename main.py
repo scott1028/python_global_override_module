@@ -24,3 +24,22 @@ lib_lib.do_in_echo = lambda: echo2()
 from lib import echo
 
 echo()
+
+# override build-in module
+import time
+
+print time.time()
+
+# make _time as build-in method, or it will in for-loop forever,
+# copy 一份到 local memory, 待會整合奧用
+from time import time as _time
+
+def time2():
+	# 這樣會變成無窮遞迴, 因為已經被替換掉了
+	
+	# return 'after override: ' + str(time.time())
+	return 'after override build-in Module: ' + str(_time()) + ' end!'
+
+time.time = lambda: time2()
+
+print time.time()
