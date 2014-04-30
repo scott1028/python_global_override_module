@@ -21,9 +21,18 @@ echo()
 
 lib_lib.do_in_echo = lambda: echo2()
 
-from lib import echo
+from lib import echo, echo3
 
 echo()
+
+echo3()
+
+def _echo3(self, data):
+	print self, data, 'after override class method'
+
+# override instance method!
+lib_lib.mylib.test = lambda self, data: _echo3(self, data)
+echo3()
 
 # override build-in module
 import time
@@ -43,3 +52,20 @@ def time2():
 time.time = lambda: time2()
 
 print time.time()
+
+# 如果要 Override 一定要 import 為 module 方式
+# import socket
+
+# print 'C:\python27\lib\socket.pyc:', socket
+
+# from socket import socket as _socket
+
+# def _send(self, data):
+# 	print 'send data by _send'
+# 	return _socket.send(data)
+
+# # socket.socket.send = lambda: _send()
+
+
+# import pdb; pdb.set_trace()
+
